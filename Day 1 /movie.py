@@ -11,7 +11,7 @@ def validate_int(question, validation):
 def validate_string(question, validation):
     value = input(question)
     while True:
-        if not value:
+        if value.rstrip() == '':
             value = input(validation)
         else:
             return value
@@ -27,18 +27,48 @@ def validate_quit():
             input("Enter Y or N")
 
 
-movie_list = []
+movie_list = [  {
+        "name": "The Shawshank Redemption",
+        "director": "Frank Darabont",
+        "length": 142,
+        "year": 1994
+    },
+    {
+        "name": "Inception",
+        "director": "Christopher Nolan",
+        "length": 148,
+        "year": 2010
+    },
+    {
+        "name": "Parasite",
+        "director": "Bong Joon-ho",
+        "length": 132,
+        "year": 2019
+    },
+    {
+        "name": "The Godfather",
+        "director": "Francis Ford Coppola",
+        "length": 175,
+        "year": 1972
+    },
+    {
+        "name": "Spirited Away",
+        "director": "Hayao Miyazaki",
+        "length": 125,
+        "year": 2001
+    }]
 repeat = True
 while repeat:
     name = validate_string("Enter movie name: ", "Movie name cannot be empty: " )
     director = validate_string("Enter director: ", "Director name cannot be empty: ")
-    length_in_minutes = validate_int(   "Enter length in minutes: ", "Please enter a valid length in minutes: " )
+    length = validate_int(   "Enter length in minutes: ", "Please enter a valid length in minutes: " )
     year = validate_int("What year was the movie release? ", "Please enter a valid year: ")
     repeat = validate_quit()
-    movie_list.append({"name": name.title(), "director": director.title(), "length_in_minutes": length_in_minutes, "year": year})
+    movie_list.append({"name": name.title(), "director": director.title(), "length": length, "year": year})
 
+print('\nYour Movie List: ')
 for movie in movie_list:
-    print(movie["name"])
-
-
-
+    print(f"\nName: {movie['name']}")
+    print(f"Director: {movie['director']}")
+    print(f"Length in minutes: {movie['length']}")
+    print(f"Year: {movie['year']}\n")
