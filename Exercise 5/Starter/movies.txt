@@ -1,0 +1,9 @@
+Jaws,Steven Spielberg,1975
+Star Wars,George Lucas,1975
+Vanilla Sky,Cameron Crowe,2001
+The Mission,Rolan Joffe,1986
+Bridget Jones Diary,Sharron McGuire,2001
+Back to the future,Robert Zemeckis,1985
+Home alone,Spielberg,1985
+Interstellar,Christopher nolan,2010
+The notebook,Scorcese,2020
