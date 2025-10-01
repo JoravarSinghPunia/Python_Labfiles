@@ -1,9 +1,8 @@
-from movie_lib.movie_funcs import search_movies, search_by_title
-from movie_lib.file_funcs import load_movies, save_movies
+from classes.movie_list import MovieList
 
 def main ():
     filename = "movies.txt"
-    movies = load_movies(filename)
+    movie_list = MovieList(filename)
 
     print("---Movie Dictionary---")
     print("Select an option: ")
@@ -21,41 +20,24 @@ def main ():
             movie_name = input("Enter movie title: ").capitalize()
             director = input("Enter movie director: ").capitalize()
             year = input("Enter movie year: ")
-            movies.append({"title": movie_name, "director": director, "year": year})
-            save_movies(filename, movies)
+            movie_list.add_movie(movie_name, director, year)
             print("Your movie was successfully added!")
 
         elif choice == 2:
             query = input("Enter the title or number of the movie to remove: ")
-            if query.isdigit():
-                idx_to_remove = int(query) - 1
-                if 0 <= idx_to_remove < len(movies):
-                    removed_movie = movies.pop(idx_to_remove)
-                    print(f"Successfully removed '{removed_movie['title']}'.")
-                else:
-                    print(f"Error: Index {idx_to_remove} is invalid.")
-            else:
-                result = search_by_title(query, movies)
-                if result is not None:
-                    movie_to_remove, idx = result
-                    movies.remove(movie_to_remove)
-                    print(f"Successfully removed '{movie_to_remove['title']}'.")
-                else:
-                    print(f"Error: Movie with title '{query}' not found.")
+            movie_list.remove_movie(query)
 
         elif choice == 3:
             query = input("Enter search term here: ")
-            found_movies = search_movies(query, movies)
+            found_movies = movie_list.search_movies(query)
             for movie in found_movies:
-                print(f"{movie['title']} ({movie['year']}) - Director: {movie['director']}")
+                print(f"{movie}")
 
         elif choice == 4:
-            if movies:
-                print("\nAll movies:")
-                for idx, movie in enumerate(movies, start=1):
-                    print(f"  {idx}. {movie['title']} ({movie['year']}) - Director: {movie['director']}")
-            else:
-                print("No movies in the list.")
+            print("\nAll movies:")
+            for idx, movie in enumerate(movie_list.get_movies(), start=1):
+                print(f"  {idx}. {movie}")
+
         elif choice == 5:
             print("Goodbye! Run the script again to restart the programme.")
         else:
